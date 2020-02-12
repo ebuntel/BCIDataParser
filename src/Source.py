@@ -15,14 +15,14 @@ class Source:
         self.posY = y 
         self.posZ = z
         self.name = name
-        self.location_name_10_20 = locationName
+        self.location_name_10_20 = locationName 
         
     def setName(self, name, locationName):
-      	self.name = name
+        self.name = name
         self.location_name_10_20 = locationName
         
     def getName(self):
-      	to_return = []
+        to_return = []
         to_return.append(self.name)
         to_return.append(self.location_name_10_20)
         return to_return
@@ -38,3 +38,10 @@ class Source:
         toret.append(self.posY)
         toret.append(self.posZ)
         return toret
+
+    def printSource(self):
+        print("Source ", self.name)
+        print("XPos: ", self.posX)
+        print("YPos: ", self.posY)
+        print("ZPos: ", self.posZ)
+        print("Location name: ", self.location_name_10_20)

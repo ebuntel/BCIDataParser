@@ -18,13 +18,14 @@ def main():
 
   channelList = []
 
-  for channelRow in np.nditer(data['probeInfo'][0][0]['probes']['index_c'][0][0]):
+  for channelRow in data['probeInfo'][0][0]['probes']['index_c'][0][0]:
     channel = RawDataChannel()
-    channel.getSource(channelRow[0], data)
-    channel.getDetector(channelRow[0], data)
+    channel.getSource(int(channelRow[0]), data)
+    channel.getDetector(int(channelRow[1]), data)
+    channelList.append(channel)
   
   for channel in channelList:
-    channelList.printRDC()
+    channel.printRDC()
 
 if __name__ == "__main__":
     main()

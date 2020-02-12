@@ -20,8 +20,8 @@ def main():
 
   for channelRow in data['probeInfo'][0][0]['probes']['index_c'][0][0]:
     channel = RawDataChannel()
-    channel.getSource(int(channelRow[0]), data)
-    channel.getDetector(int(channelRow[1]), data)
+    channel.retrieveSource(int(channelRow[0]), data)
+    channel.retrieveDetector(int(channelRow[1]), data)
     channelList.append(channel)
   
   for channel in channelList:

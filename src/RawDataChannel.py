@@ -12,7 +12,29 @@ class RawDataChannel:
         self.badDataFlag = False
         self.name = ""
 
-    def getSource(self, sourceNum, probeInfo):
+    # Getters and Setters
+
+    def getSource(self):
+        return self.source
+
+    def getDetector(self):
+        return self.detector
+
+    def getDataFlag(self):
+        return self.badDataFlag
+
+    def getName(self):
+        return self.name
+
+    def setName(self, newName):
+        self.name = newName
+
+    def setDataFlag(self, newFlag):
+        self.badDataFlag = newFlag
+
+    #
+
+    def retrieveSource(self, sourceNum, probeInfo):
         sourceNum -= 1
 
         try:
@@ -26,7 +48,7 @@ class RawDataChannel:
             print("Source parsing failed")
         
 
-    def getDetector(self, detectorNum, probeInfo):
+    def retrieveDetector(self, detectorNum, probeInfo):
         detectorNum -= 1
 
         try:

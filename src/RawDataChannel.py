@@ -46,7 +46,6 @@ class RawDataChannel:
             self.source = Source(xCoord, yCoord, zCoord, name, locationName)
         except KeyError:
             print("Source parsing failed")
-        
 
     def retrieveDetector(self, detectorNum, probeInfo):
         detectorNum -= 1

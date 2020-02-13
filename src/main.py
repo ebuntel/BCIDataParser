@@ -1,11 +1,7 @@
 import numpy as np
 
 from scipy.io import loadmat
-from RawDataChannel import RawDataChannel
-
-#
-#
-#
+from RawData import RawData
 
 # def testSourceAndDetectorPrints():
 #     src = Source(1.0, 2.0, -4.5, "george", "feckoff")
@@ -16,15 +12,10 @@ from RawDataChannel import RawDataChannel
 def main():
   data = loadmat("223_AXCPT19_CH_probeinfo.mat")
 
-  channelList = []
-
-  for channelRow in data['probeInfo'][0][0]['probes']['index_c'][0][0]:
-    channel = RawDataChannel()
-    channel.retrieveSource(int(channelRow[0]), data)
-    channel.retrieveDetector(int(channelRow[1]), data)
-    channelList.append(channel)
+  rawDat = RawData()
+  rawDat.retrieveRawDataChannels(data)
   
-  for channel in channelList:
+  for channel in rawDat.channels:
     channel.printRDC()
 
 if __name__ == "__main__":

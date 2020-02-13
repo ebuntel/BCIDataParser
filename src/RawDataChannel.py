@@ -1,16 +1,25 @@
 from Detector import Detector
 from Source import Source
 
-#
-#
-#
 class RawDataChannel:
+    """Holds the data of one channel (a channel is one source linked to one detector)
+
+    Attributes:
+        source:
+        detector:
+        badDataFlag:
+        name:
+    """
+
+    # Constructors
 
     def __init__(self):
         self.source = None
         self.detector = None
         self.badDataFlag = False
         self.name = ""
+
+    #
 
     # Getters and Setters
 
@@ -35,6 +44,9 @@ class RawDataChannel:
     #
 
     def retrieveSource(self, sourceNum, probeInfo):
+        """
+
+        """
         sourceNum -= 1
 
         try:
@@ -48,6 +60,9 @@ class RawDataChannel:
             print("Source parsing failed")
 
     def retrieveDetector(self, detectorNum, probeInfo):
+        """
+
+        """
         detectorNum -= 1
 
         try:

@@ -12,21 +12,27 @@ from tkinter.filedialog import askopenfilename
 """
 
 Name: load
-Description: this function loads nirs file into python
-Parameter:either provide a fileName when executing the script or select the file
-with the diaglog popup
-Output/result: a dictionary object that has data imported from Matlab file
+Description: this function loads probeInfor and nirs file into python
+Parameter:either select the file with the diaglog popup by choosing probeInfo file and Nirsfile
+or provide these parameter when executing the script
+    python main.py <probeInfo> <Nirsfile>
+Output/result: 2 dictionaries: probeInfor, Nirs_Info
 """
 def load():
-    if len(sys.argv) != 2:
-        print('Please select a file for parsing')
+    if len(sys.argv) != 3:
+        print('Please select probeInfo file')
         Tk().withdraw() #prevent opening a full diaglog
         filename=askopenfilename()
-        data = loadmat(filename)
-        return data
+        probe_data = loadmat(filename)
+        Tk().withdraw() #prevent opening a full diaglog
+        filename=askopenfilename()
+        print('Please select nirs file')
+        nirs_data = loadmat(filename)
+        return probe_data,nirs_data
     else:
-        data = loadmat(sys.argv[1])
-        return data
+        probe_data = loadmat(sys.argv[1])
+        nirs_data = loadmat(sys.argv[2])
+        return probe_data, nirs_data
 
 # def testSourceAndDetectorPrints():
 #     src = Source(1.0, 2.0, -4.5, "george", "feckoff")
@@ -35,9 +41,11 @@ def load():
 #     det.printDetector()
 
 def main():
-  data = load()
+  #get probe_data, nirs_data
+  #pass in nirs_data to parse other information
+  probe_data, nirs_data  = load()
   rawDat = RawData()
-  rawDat.retrieveRawDataChannels(data)
+  rawDat.retrieveRawDataChannels(probe_data)
 
   for channel in rawDat.channels:
     channel.printRDC()

@@ -2,13 +2,16 @@ from Detector import Detector
 from Source import Source
 
 class RawDataChannel:
-    """Holds the data of one channel (a channel is one source linked to one detector)
+    """Holds the data of one channel (a channel is one source linked to one detector).
+    Data on the source and detectors are retrieved from the probe info files using the retrieveSource and 
+    retrieveDetector functions below.
+    Instances of this class are contained in the RawData class.
 
     Attributes:
-        source:
-        detector:
-        badDataFlag:
-        name:
+        source: Contains the source half of this channel object. Starts as none and is filled by the retrieveSource function.
+        detector: Contains the detector half of this channel object. Starts as none and is filled by the retrieveDetector function.
+        badDataFlag: A bool used to flag channels that contain bad data. Default is false.
+        name: The name of the raw data channel. Takes the form C# (ex: C1, C13, C21, and so on).
     """
 
     # Constructors

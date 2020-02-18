@@ -36,6 +36,12 @@ class RawDataCollection:
 
     def retrieveRawData(self, nirsFile):
         """Retrieves all of the data points from the fNIRS file.
+
+        Args:
+            nirsFile: The dictionary returned by loadmat when loading the .nirs file
+
+        Returns:
+            Nothing
         """
         rowNum = 0
         for row in nirsFile['d']:

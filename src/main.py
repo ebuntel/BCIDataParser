@@ -1,16 +1,20 @@
 import numpy as np
 
 from scipy.io import loadmat
-from RawData import RawData
+from RawDataCollection import RawDataCollection
 
 def main():
+  print("Starting script")
   data = loadmat("223_AXCPT19_CH_probeinfo.mat")
+  nirs = loadmat("test_nirs.nirs")
 
-  rawDat = RawData()
-  rawDat.retrieveRawDataChannels(data)
+  rawDat = RawDataCollection()
+  rawDat.retrieveRawDataChannels(data, nirs)
+  rawDat.retrieveSourcesAndDetectors(data)
+  rawDat.retrieveRawData(nirs)
   
-  for channel in rawDat.getChannels():
-    channel.printRDC()
+  for dat in rawDat.getRawDataPoints():
+    dat.printDataPoint()
 
 if __name__ == "__main__":
     main()

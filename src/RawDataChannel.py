@@ -1,5 +1,3 @@
-from Detector import Detector
-from Source import Source
 
 class RawDataChannel:
     """Holds the data of one channel (a channel is one source linked to one detector).
@@ -8,19 +6,21 @@ class RawDataChannel:
     Instances of this class are contained in the RawData class.
 
     Attributes:
-        source: Contains the source half of this channel object. Starts as none and is filled by the retrieveSource function.
-        detector: Contains the detector half of this channel object. Starts as none and is filled by the retrieveDetector function.
+        source: The source number
+        detector: the detector number
         badDataFlag: A bool used to flag channels that contain bad data. Default is false.
         name: The name of the raw data channel. Takes the form C# (ex: C1, C13, C21, and so on).
+        wavelength: The wavelength of the channel.
     """
 
     # Constructors
 
     def __init__(self):
-        self.source = None
-        self.detector = None
+        self.source = 0
+        self.detector = 0
         self.badDataFlag = False
         self.name = ""
+        self.wavelength = 0
 
     #
 
@@ -38,6 +38,15 @@ class RawDataChannel:
     def getName(self):
         return self.name
 
+    def getWavelength(self):
+        return self.wavelength
+
+    def setSource(self, sourceNum):
+        self.source = sourceNum
+
+    def setDetector(self, detectorNum):
+        self.detector = detectorNum
+
     def setName(self, newName):
         self.name = newName
 
@@ -46,43 +55,29 @@ class RawDataChannel:
 
     #
 
-    def retrieveSource(self, sourceNum, probeInfo):
+    def retrieveWavelength(self, index, nirsFile):
+        """Retrieves the wavelength of the channel
+
+        Args:
+            index: The index of the desired wavelength in the wavelength array
+            nirsFile: The dictionay loadmat returns when the .nirs file is loaded
+
+        Returns: 0 if successful, -1 if not
         """
 
-        """
-        sourceNum -= 1
+        if(index == 0):
+            self.wavelength = nirsFile['SD']['Lambda'][0][0][0][0]
+            return 0
+        elif(index == 1):
+            self.wavelength = nirsFile['SD']['Lambda'][0][0][0][1]
+            return 0
+        else:
+            return -1
 
-        try:
-            name = str(sourceNum+1)
-            locationName = probeInfo['probeInfo'][0][0]['probes']['labels_s'][0][0][0][sourceNum][0]
-            xCoord = probeInfo['probeInfo'][0][0]['probes']['coords_s3'][0][0][sourceNum][0]
-            yCoord = probeInfo['probeInfo'][0][0]['probes']['coords_s3'][0][0][sourceNum][1]
-            zCoord = probeInfo['probeInfo'][0][0]['probes']['coords_s3'][0][0][sourceNum][2]
-            self.source = Source(xCoord, yCoord, zCoord, name, locationName)
-        except KeyError:
-            print("Source parsing failed")
-
-    def retrieveDetector(self, detectorNum, probeInfo):
-        """
-
-        """
-        detectorNum -= 1
-
-        try:
-            name = str(detectorNum+1)
-            locationName = probeInfo['probeInfo'][0][0]['probes']['labels_d'][0][0][0][detectorNum][0]
-            xCoord = probeInfo['probeInfo'][0][0]['probes']['coords_d3'][0][0][detectorNum][0]
-            yCoord = probeInfo['probeInfo'][0][0]['probes']['coords_d3'][0][0][detectorNum][1]
-            zCoord = probeInfo['probeInfo'][0][0]['probes']['coords_d3'][0][0][detectorNum][2]
-            self.detector = Detector(xCoord, yCoord, zCoord, name, locationName)
-        except KeyError:
-            print("Detector parsing failed")
-
+    
     def printRDC(self):
         print("Raw Data Channel ", self.name)
-        if self.source != None:
-            self.source.printSource()
-        if self.detector != None:
-            self.detector.printDetector()
+        print("Source: ", self.source)
+        print("Detector: ", self.detector)
         if self.badDataFlag:
             print("This channel contains bad data!")

@@ -1,4 +1,5 @@
 #!venv/bin/python
+#!venv/bin/python
 
 import psycopg2
 #!venv/bin/python
@@ -14,14 +15,22 @@ import time
 from six import b, BytesIO
 #from io import BytesIO
 
-#NOTE: needs info that is being parsed passed put in where indicated 
+#NOTE: needs info that is being parsed passed put in where indicated
 
 begin = time.time() #start timer
 
 print('beginning run:', time.asctime(time.localtime(begin)))
-jhA-j4X-ZqI-LTX
+
 try:
     connectionInfo = "" #parsing information from .nRIS file that has been parsed
+    '''
+    #may need this for connecting
+    connection = psycopg2.connect(user = "postgres",
+                                      password = "jhA-j4X-ZqI-LTX",
+                                      host = "127.0.0.1",
+                                      port = "5432",
+                                      database = "postgres_db")
+    '''
     if connectionInfo is None:
             print('No connection information found in config, ending parse.') #no connection found, stop program
             return

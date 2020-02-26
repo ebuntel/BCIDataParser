@@ -33,10 +33,14 @@ After running the above code rawDat (an instance of the RawDataCollection class)
 
 ##### Fields
 
-**channels:** This is a list object containing all of the channel objects which are retrieved by RawDataCollection's retrieveRawDataChannels method.
+###### channels: 
+This is a list object containing all of the channel objects which are retrieved by RawDataCollection's retrieveRawDataChannels method.
 
-**sources:** This is a list object containing all of the source objects which are retrieved by RawDataCollection's retrieveSourcesAndDetectors method.
+###### sources:
+This is a list object containing all of the source objects which are retrieved by RawDataCollection's retrieveSourcesAndDetectors method.
 
-**detectors:** This is a list object containing all of the detector objects which are retrieved by RawDataCollection's retrieveSourcesAndDetectors method.
+###### detectors:
+This is a list object containing all of the detector objects which are retrieved by RawDataCollection's retrieveSourcesAndDetectors method.
 
-**raw_data_list:** This is a list object containing all of the raw_data objects which are retrieved by RawDataCollection's retrieveRawData method.
+###### raw_data_list:
+This is a list object containing all of the raw_data objects which are retrieved by RawDataCollection's retrieveRawData method.

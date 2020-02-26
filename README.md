@@ -17,7 +17,7 @@ The first step in the process is to retrieve information from the .nirs and prob
 
 Here is a quick example of how to parse the information you'll need to upload to the database:
 
-"""python
+```python
 data = loadmat("test_probeinfo.mat")
 nirs = loadmat("test_nirs.nirs")
 
@@ -25,7 +25,7 @@ rawDat = RawDataCollection()
 rawDat.retrieveRawDataChannels(data, nirs)
 rawDat.retrieveSourcesAndDetectors(data)
 rawDat.retrieveRawData(nirs)
-"""
+```
 
 After running the above code rawDat (an instance of the RawDataCollection class) will contain all of the information you need. See the RawDataCollection section below for further details.
 
